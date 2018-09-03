@@ -1,14 +1,14 @@
 /**
- * @file JSONRPC 2.0 request authentication with steem authorities.
+ * @file JSONRPC 2.0 request authentication with dPay authorities.
  * @author Johan Nordberg <johan@steemit.com>
  */
 
-import {hexify, PrivateKey} from '@steemit/libcrypto'
+import {hexify, PrivateKey} from '@dpay/libcrypto'
 import {createHash, randomBytes} from 'crypto'
 
 /**
  * Signing constant used to reserve opcode space and prevent cross-protocol attacks.
- * Output of `sha256('steem_jsonrpc_auth')`.
+ * Output of `sha256('dpay_jsonrpc_auth')`.
  */
 export const K = Buffer.from('3b3b081e46ea808d5a96b08c4bc5003f5e15767090f344faab531ec57565136b', 'hex')
 
@@ -37,7 +37,7 @@ export interface SignedJsonRpcRequest extends JsonRpcRequest {
             nonce: string
             /** ISO8601 formatted date */
             timestamp: string
-            /** Signers steemit account name */
+            /** Signers dPayID account name */
             account: string
             /** JSON+base64 encoded request params */
             params: string
@@ -70,7 +70,7 @@ class ValidationError extends Error {
  * Create request hash to be signed.
  *
  * @param timestamp  ISO8601 formatted date e.g. `2017-11-14T19:40:29.077Z`.
- * @param account    Steem account name that is the signer.
+ * @param account    dPay account name that is the signer.
  * @param method     RPC request method.
  * @param params     Base64 encoded JSON string containing request params.
  * @param nonce      8 bytes of random data.
@@ -143,7 +143,7 @@ export function sign(request: JsonRpcRequest, account: string, keys: any[]): Sig
  * @param account     Account whose posting authority created the signatures.
  *
  * Responsible for:
- *   1. Account must be a valid steem blockchain account
+ *   1. Account must be a valid dPay blockchain account
  *   2. All signatures must be a hex string >= 64 chars (32+ bytes decoded)
  *   3. Signature matches message
  *   4. Signature was made with accounts posting authority
