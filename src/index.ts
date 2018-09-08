@@ -3,7 +3,7 @@
  * @author Johan Nordberg <johan@steemit.com>
  */
 
-import {hexify, PrivateKey} from '@dpay/libcrypto'
+import {hexify, PrivateKey} from 'dpay-libcrypto'
 import {createHash, randomBytes} from 'crypto'
 
 /**

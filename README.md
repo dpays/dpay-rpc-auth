@@ -1,5 +1,5 @@
 
-@dpay/rpc-auth
+dpay-rpc-auth
 =================
 
 JSONRPC 2.0 authentication with dPay authorities

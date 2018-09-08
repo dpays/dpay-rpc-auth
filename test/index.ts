@@ -2,7 +2,7 @@ import 'mocha'
 import * as assert from 'assert'
 import {randomBytes} from 'crypto'
 import * as fetch from 'node-fetch'
-import {PrivateKey, Client, utils, Signature} from '@dpay/rpc'
+import {PrivateKey, Client, utils, Signature} from 'ddpay'
 
 import {sign, validate, JsonRpcRequest, VerifyMessage, SignedJsonRpcRequest} from './../src/'
 
@@ -38,7 +38,7 @@ async function createTestnetAccount(): Promise<{username: string, password: stri
     }
     const password = randomString(32)
     const username = `rpcauth-${ randomString(8) }`
-    const response = await fetch('https://api.dpays.io/create', {
+    const response = await fetch('https://greatchain.dpays.io/create', {
         method: 'POST',
         body: `username=${ username }&password=${ password }`,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
